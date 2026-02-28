@@ -33,6 +33,18 @@ with st.sidebar:
 # --- SEKCJA 1: MONITORING (WAR ROOM) ---
 if menu == "🛰️ MONITORING":
     st.header("🛰️ GLOBAL MONITORING CENTER")
+
+    # --- ROZKAZ DNIA: RADY AGENTÓW ---
+    st.markdown("### 📜 ROZKAZ DNIA")
+    with st.container():
+        st.markdown("""
+        <div style="background: rgba(0, 255, 204, 0.05); padding: 15px; border-radius: 15px; border-left: 5px solid #00ffcc;">
+            <p style="margin: 5px;">🎯 <b>Zahir:</b> Optymalizacja CV pod algorytmy ATS (AI-Ready).</p>
+            <p style="margin: 5px;">🛡️ <b>Diabolina:</b> Audyt logów portów 8501/8502 (Security Check).</p>
+            <p style="margin: 5px;">🚀 <b>Grok/OpenAI:</b> Synchronizacja bazy wiedzy w 2V_Office.</p>
+        </div>
+        """, unsafe_allow_html=True)
+    st.write("")
     
     col1, col2, col3, col4 = st.columns(4)
     col1.metric("GATEKEEPER", "SECURE", "SHA-OK")
@@ -54,6 +66,25 @@ if menu == "🛰️ MONITORING":
         22:12:45 - Sync: Push Success
         21:55:12 - Poison: Decoy serving...
         """, language="text")
+
+    st.subheader("📝 AGENDA RADY AGENTÓW")
+    todo_list = {
+        "Zahir": "Optymalizacja struktury CV i analiza trendów AI 2026",
+        "Diabolina": "Monitoring portów 8501/8502 i alerty WhatsApp"
+    }
+    for agent, task in todo_list.items():
+        st.checkbox(f"{agent}: {task}", value=True)
+
+    # --- TERMINARZ OPERACYJNY ZAHIRA ---
+    st.markdown("---")
+    st.subheader("📅 TERMINARZ AGENTÓW")
+
+    events = [
+        {"Data": "2026-02-28", "Agent": "Diabolina", "Zadanie": "Finalny Sync Multiversum", "Status": "✅"},
+        {"Data": "2026-03-01", "Agent": "Zahir", "Zadanie": "Publikacja Portfolio / PDF CV", "Status": "⏳"},
+        {"Data": "2026-03-02", "Agent": "Vinci System", "Zadanie": "Auto-Poison Update", "Status": "📅"}
+    ]
+    st.table(pd.DataFrame(events))
 
 # --- SEKCJA 2: CV / PORTFOLIO (TWOJA PREZENTACJA) ---
 elif menu == "📄 CV / PORTFOLIO":
