@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+from typing import Optional; import subprocess; from pathlib import Path
 """
 sync_agents.py | daVVinci GITHUB_SYNC
 Synchronizacja agentów ZAHIR, DIABOLINA, Compliance z repozytorium GitHub.
@@ -41,7 +41,7 @@ def log_audit(agent: str, action: str, status: str, detail: str = ""):
         f.write(line)
 
 
-def run_git(args: list[str], cwd: Path | None = None) -> subprocess.CompletedProcess:
+def run_git(args: list[str], cwd: Optional[Path] = None) -> subprocess.CompletedProcess:
     """Uruchamia komendę git. cwd domyślnie ROOT."""
     return subprocess.run(
         ["git"] + args,
