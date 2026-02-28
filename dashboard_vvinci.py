@@ -4,6 +4,7 @@ import time
 import pandas as pd
 import numpy as np
 from pathlib import Path
+from DIABOLINA_CORE.whatsapp_notifier import send_vinci_alert
 
 # Konfiguracja strony
 st.set_page_config(page_title="VINCIOFFICE OS", page_icon="💎", layout="wide")
@@ -41,6 +42,10 @@ with col1:
     if st.button("🚀 GITHUB SYNC"):
         subprocess.run(["python3", "sync_vvinci.py"])
         st.info("Repozytorium zaktualizowane.")
+
+    if st.button("🚨 ALARM"):
+        send_vinci_alert("Użytkownik wywołał procedurę ALARM z telefonu!")
+        st.error("Wysłano alert WhatsApp do Właściciela!")
 
 with col2:
     st.write("📊 MONITOROWANIE PRÓB SKANOWANIA (Real-time)")

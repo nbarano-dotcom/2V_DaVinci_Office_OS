@@ -1,3 +1,7 @@
+import sys
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+
 import streamlit as st
 import time
 from datetime import datetime
@@ -58,4 +62,4 @@ if cmd:
 
 # Stopka mobilna
 st.write("---")
-st.markdown("<p style='text-align: center; color: #444;'>Vinci Office OS Mobile Utility</p>", unsafe_allow_html=True)
+st.markdown("<p style='text-align: center; color: #444;'>Vinci Office OS Mobile Utility | PAPKA</p>", unsafe_allow_html=True)
