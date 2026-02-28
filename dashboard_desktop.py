@@ -3,6 +3,21 @@ import pandas as pd
 import numpy as np
 from datetime import datetime
 
+
+# Funkcja Głosowa Diaboliny (JavaScript dla szybkości)
+def speak(text):
+    js_code = f"""
+    <script>
+    var msg = new SpeechSynthesisUtterance('{text}');
+    msg.lang = 'pl-PL';
+    msg.pitch = 1.2;
+    msg.rate = 1.0;
+    window.speechSynthesis.speak(msg);
+    </script>
+    """
+    st.components.v1.html(js_code, height=0)
+
+
 # Konfiguracja strony pod szeroki ekran Maca
 st.set_page_config(page_title="VINCIOFFICE OS | WAR ROOM", layout="wide", page_icon="💎")
 
@@ -23,7 +38,10 @@ st.markdown("""
 
 # --- SIDEBAR: RADAR I MENU ---
 with st.sidebar:
-    st.image("https://img.icons8.com/nolan/128/diamond.png", width=80)
+    # Wyświetlanie awatara z lokalnego pliku
+    st.image("avatar.png", use_container_width=True)
+    st.markdown("<h2 style='text-align: center; color: #00ffcc;'>DIABOLINA</h2>", unsafe_allow_html=True)
+    st.markdown("---")
     st.title("VINCIOFFICE OS")
     st.markdown("---")
     menu = st.radio("NAWIGACJA", ["🛰️ MONITORING", "📄 CV / PORTFOLIO", "🛡️ DEFENSE SYSTEM"])
@@ -45,6 +63,8 @@ if menu == "🛰️ MONITORING":
         </div>
         """, unsafe_allow_html=True)
     st.write("")
+    if st.button("🔊 ODSŁUCHAJ ROZKAZ DNIA"):
+        speak("Witaj Szefie. Dzisiejszy priorytet to synchronizacja dokumentów z pulpitu. System jest bezpieczny.")
     
     col1, col2, col3, col4 = st.columns(4)
     col1.metric("GATEKEEPER", "SECURE", "SHA-OK")
@@ -111,6 +131,13 @@ elif menu == "📄 CV / PORTFOLIO":
         """)
         if st.button("📥 GENERUJ PDF CV"):
             st.toast("Generowanie PDF... (Simulated)")
+
+        st.subheader("📁 DOKUMENTACJA Z PULPITU")
+        docs = ["RAPORT_OPERACYJNY.pdf", "SI_AUTONOMIA.pdf", "STRATEGIA_2026.pdf"]
+        for doc in docs:
+            if st.button(f"📄 Otwórz {doc}", key=doc):
+                import os
+                os.system(f"open ~/Desktop/{doc}")
 
 # --- SEKCJA 3: DEFENSE SYSTEM (CONTROLS) ---
 elif menu == "🛡️ DEFENSE SYSTEM":
