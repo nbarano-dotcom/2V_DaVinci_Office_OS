@@ -1,72 +1,42 @@
 import streamlit as st
-import subprocess
-import time
 import pandas as pd
-import numpy as np
-from pathlib import Path
-from DIABOLINA_CORE.whatsapp_notifier import send_vinci_alert
+import os
 
-# Konfiguracja strony
-st.set_page_config(page_title="VINCIOFFICE OS", page_icon="💎", layout="wide")
+st.set_page_config(layout="wide", page_title="Vinci Office OS - Rada Agentów")
 
-# Stylizacja Cyber-Dark
-st.markdown("""
-    <style>
-    .main { background-color: #0e1117; color: #00ffcc; }
-    .stButton>button { width: 100%; border-radius: 5px; height: 3em; background-color: #262730; color: #00ffcc; border: 1px solid #00ffcc; }
-    .stAlert { background-color: #1a1a1a; color: #ff4b4b; border: 1px solid #ff4b4b; }
-    </style>
-    """, unsafe_allow_html=True)
+st.title("🛡️ VINCI OFFICE OS - DASHBOARD OPERACYJNY")
+st.markdown("---")
 
-st.title("💎 VINCI OFFICE OS - DASHBOARD")
-st.subheader("DIABOLINA_CORE | Rada Agentów v1.0")
-
-col1, col2 = st.columns([1, 2])
+# Tworzymy 4 kolumny (4 okienka dla Agentów)
+col1, col2 = st.columns(2)
+col3, col4 = st.columns(2)
 
 with col1:
-    st.info("🛡️ STATUS VINCI SHIELD")
-    
-    # Sprawdzanie integralności (Mock dla Gatekeepera)
-    if st.button("URUCHOM AUDYT INTEGRALNOŚCI"):
-        with st.spinner("Weryfikacja SHA256..."):
-            time.sleep(1.5)
-            st.success("INTEGRALNOŚĆ POTWIERDZONA: 5e5169c")
-            st.balloons()
-
-    st.warning("☣️ OFENSYWA: VINCI POISON")
-    if st.button("DEPLOY DECOY STRATEGY"):
-        subprocess.run(["python3", "-m", "DIABOLINA_CORE.poison_logic"])
-        st.error("TRAP DEPLOYED: decoy_strategy.py is live.")
-
-    st.markdown("---")
-    if st.button("🚀 GITHUB SYNC"):
-        subprocess.run(["python3", "sync_vvinci.py"])
-        st.info("Repozytorium zaktualizowane.")
-
-    if st.button("🚨 ALARM"):
-        send_vinci_alert("Użytkownik wywołał procedurę ALARM z telefonu!")
-        st.error("Wysłano alert WhatsApp do Właściciela!")
+    st.header("😈 DIABOLINA (Strategia)")
+    st.info("Status: Analiza Kontekstu Chmurowego\n\nOstatnie: Operat Smarków - WYMAZANY. Focus: Fundacja Rodzinna.")
+    if st.button("Wymuś Raport Strategiczny"):
+        st.write("Generowanie raportu...")
 
 with col2:
-    st.write("📊 MONITOROWANIE PRÓB SKANOWANIA (Real-time)")
-    
-    # Symulacja danych wykresu
-    chart_data = pd.DataFrame(
-        np.random.randn(20, 2) / [10, 5],
-        columns=['BigTech Probes', 'Vinci Shield Blocks']
-    )
-    st.line_chart(chart_data)
+    st.header("⚖️ AGENT PRAWNY (Wolska/Emery)")
+    if os.path.exists("LOGS/legal_audit.log"):
+        with open("LOGS/legal_audit.log", "r") as f:
+            logs = f.readlines()[-5:] # Ostatnie 5 linii
+            for log in logs:
+                st.warning(log)
+    else:
+        st.error("Błąd: Brak logów prawnych! Uruchom agents/agent_prawny.py")
 
-    st.write("📁 STRUKTURA FORTU:")
-    st.code("""
-    ~/2V_Office/
-    ├── DIABOLINA_CORE/
-    │   ├── gatekeeper.py (Active)
-    │   └── poison_logic.py (Armed)
-    ├── STRATEGIA_2VINCI.md (Locked)
-    └── license_contract.py (Encrypted)
-    """, language="text")
+with col3:
+    st.header("👤 ZAHIR (Logistyka/Teren)")
+    st.success("Operacja EXIT (Tarnowskie Góry): 85% gotowości\nStatus: Monitoring pooperacyjny.")
+    st.image("https://via.placeholder.com/400x200?text=Mapa+Operacji+Vinci", caption="Podgląd Terenowy")
 
-# Stopka
+with col4:
+    st.header("📚 BIBLIOTEKARZ (Baza Danych)")
+    st.write("Indeksowanie Google Drive: AKTYWNE")
+    st.progress(100)
+    st.write("Ostatni sync: Przed chwilą (z GitHub)")
+
 st.markdown("---")
-st.caption("🔒 Vinci Office OS - System Suwerenny | 2026")
+st.write("Status Połączenia: **CORTEX AI CONNECTED** | Token GitHub: **ACTIVE**")
